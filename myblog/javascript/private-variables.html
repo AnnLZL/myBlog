@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ann' blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="apple-touch-icon" href="../icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+                Ann
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="../index.html"><span class="fa fa-home fa-lg" aria-hidden="true"></span> <b>Home </b><span class="sr-only">(current)</span></a></li>
+                <li><a href="../pictures.html"><span class="fa fa-picture-o fa-lg" aria-hidden="true"></span> <b>Pictures </b></a></li>
+                <li id="search"><a href="#"><span class="fa fa-search fa-lg" aria-hidden="true"></span> <b>Search </b></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--内容-->
+<main class="post-contents">
+    <div class="container-fluid">
+        <div class="col-lg-2 col-md-2 col-sm-1">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-10">
+            <div class="post-content">
+                <div class="post-header">
+                    <h1>私有变量</h1>
+                </div>
+                <div class="content">
+                    <div class="p-section">
+                        <h3>模仿块级作用域</h3>
+                        <p>Javascript中没有块级作用域的概念，这意味着在块语句（如循环语句）中定义的变量实际上是包含在函数中而非语句所创建的，从它有定义开始，就可以在在函数内部随处访问它。Javascript从来不会告诉你是否多次声明了同一个变量，后面的声明会覆盖掉前面的相同声明。匿名函数可以用来模仿块级作用域避免这个问题。</p>
+                        <pre><code class="javascript">(function(){
+   //这里是块级作用域
+})();
+</code></pre>
+                        <p>将函数声明包含在圆括号中，表示它实际上是一个函数表达式，而紧随其后的另一对圆括号会立即调用这个函数。可能感到奇怪的是左边的一对圆括号，去掉后，Javascript会把<code>function</code>关键字作为一个函数声明的开始，而函数声明后面是不能加圆括号的，这样的代码会导致错误。无论在什么地方，如果只是临时需要一些变量的话，就可以包含在块级作用域中，在其中定义的任何变量，都会在执行结束时被销毁。这种技术经常在全局作用域中被用在函数外部，从而限制向全局作用域中添加过多的变量和函数，一般来说我们都应该尽量减少向全局作用域中添加过多的变量和函数。</p>
+                    </div>
+
+                    <div class="p-section">
+                        <h3>静态私有变量</h3>
+                        <p>任何在函数中定义的变量，都可以认为是私有变量，因而不能再函数的外部访问这些变量。如果在这个函数内部创建一个闭包，那么闭包通过自己的作用域链也能够访问到这些变量。而利用这一点，就可以创建用于访问私有变量的公有方法，我们把有权访问私有变量和私有函数的公有方法统称为特权方法。</p>
+                        <pre><code class="javascript">(function(){
+
+   //私有变量和私有函数
+   var privateVariable=10;
+
+   function privateFunction(){
+      return false;
+   }
+
+   //构造函数
+   myObject=function(){
+   };
+
+   //公有和特权方法
+   myObject.prototype.publicMethod=function(){
+      privateVariable++;
+      return privateFunction();
+   };
+})();
+</code></pre>
+
+                        <p>这个模式创建了一个私有作用域，在私有作用域中，首先定义了私有变量和私有函数，然后又定义了构造函数及其公有方法。公有方法是在原型上定义的，这一点体现了典型的原型模式。需要注意的是，这个模式在定义构造函数时并没有使用函数声明，而是使用了函数表达式。函数声明只能创建局部函数，但这并不是我们所需要的，出于同样的原因，在声明<code>myObject</code>关键字时没有使用<code>var</code>关键字，这样<code>myObject</code>就成了一个全局变量，能够在私有作用域之外被访问到。</p>
+                    </div>
+
+                    <div class="p-section">
+                        <h3>模块模式</h3>
+                        <p>前面的模式是用于为自定义类型创建私有变量和特权方法的，而模块模式则是为单例创建私有变量和特权方法的，所谓单例，指的是只有一个实例的对象。语法形式如下：</p>
+                        <pre><code class="javascript">var singleton=function(){
+
+   //私有变量和私有函数
+   var privateVariable=10;
+   function privateFunction(){
+      return false;
+   }
+
+   //特权方法
+   return {
+      publicProperty: true,
+      publicMethod: function(){
+         privateVariable++;
+         return privateFunction();
+      }
+   }
+}();
+</code></pre>
+
+                    </div>
+
+                    <div class="p-section">
+                        <h3>增强的模块模式</h3>
+                        <p>有人进一步改进了模块模式，即在返回对象之前加入对其增强的代码。这种增强的模块模式适合那些单例必须是某种类型的实例，同时还必须添加某些属性和（或）方法对其加以增强的情况。来看下面的例子。</p>
+                        <pre><code class="javascript">var singleton=function(){
+   //私有变量和私有函数
+   var privateVariable=10;
+   function privateFunction(){
+      return false;
+   }
+
+   //创建对象
+   var object=new CustomeType();
+
+   //添加特权方法
+   object.publicProperty=true;
+   onject.publicMethod=function(){
+      privateVariable++;
+      return privateFunction();
+   }
+
+   //返回这个对象
+   return object;
+}();
+</code></pre>
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-part2">
+                <!-- 多说评论框 start -->
+                <div class="ds-thread" data-thread-key="https://AnnLZL.github.io/javascript/2018/01/06/private-variables" data-title="私有变量" data-url="https://AnnLZL.github.io/javascript/2018/01/06/private-variables"></div>
+                <!-- 多说评论框 end -->
+                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                <script type="text/javascript">
+                    var duoshuoQuery = {short_name:"ycps"};
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';ds.async = true;
+                        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0]
+                        || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- 多说公共JS代码 end -->
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-1">
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<!--页脚-->
+<footer>
+    <ul class="container">
+        <li><a href="##"><i class="fa fa-qq" aria-hidden="true"></i><span> 2498654056 </span></a></li>
+        <li><a href="#"><span> © 2017 刘中伦</span></a></li>
+        <li><a href="##"><i class="fa fa-github"></i><span> GitHub</span></a></li>
+    </ul>
+</footer>
+<!--搜索-->
+<div id="search-box">
+    <div id="close">
+        <span class="fa fa-times-circle-o fa-5x"></span>
+    </div>
+    <div class="row">
+        <div class="search-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div id="laber">
+                <span class="label label-default">jQuery</span>
+                <span class="label label-primary">Bootstrap</span>
+                <span class="label label-success">JavaScript</span>
+                <span class="label label-info">React.js</span>
+                <span class="label label-warning">CSS</span>
+                <span class="label label-danger">html</span>
+            </div>
+            <div id="search-form" class="input-group">
+                <input type="text" id="search_input" x-webkit-speech='' class="form-control" placeholder="Search" />
+                <span type="submit" class="input-group-addon btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </span>
+            </div>
+            <div class="suggest" id="search-suggest" style="display: none">
+                <ul id="search-result"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Respond.js for IE 8 or less only -->
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="../js/vendor/respond.min.js"></script>
+<![endif]-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/search.js"></script>
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+</body>
+</html>

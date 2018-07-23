@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ann' blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="apple-touch-icon" href="../icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+                Ann
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="../index.html"><span class="fa fa-home fa-lg" aria-hidden="true"></span> <b>Home </b><span class="sr-only">(current)</span></a></li>
+                <li><a href="../pictures.html"><span class="fa fa-picture-o fa-lg" aria-hidden="true"></span> <b>Pictures </b></a></li>
+                <li id="search"><a href="#"><span class="fa fa-search fa-lg" aria-hidden="true"></span> <b>Search </b></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--内容-->
+<main class="post-contents">
+    <div class="container-fluid">
+        <div class="col-lg-2 col-md-2 col-sm-1">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-10">
+            <div class="post-content">
+                <div class="post-header">
+                    <h1>函数表达式及闭包</h1>
+                </div>
+                <div class="content">
+                    <div class="p-section">
+                        <h3>① 函数表达式：</h3>
+<p>
+函数表达式是JavaScript 中的一个既强大又容易令人困惑的特性。定义函数的方式有两种：一种是函数声明，另一种就是函数表达式。函数声明的语法是这样的。
+</p>
+<pre>
+<code class="javascript">function functionName(arg0, arg1, arg2) {
+//函数体
+ }</code>
+</pre>
+<p>
+关于函数声明，它的一个重要特征就是函数声明提升（function declaration hoisting），意思是在执行
+  代码之前会先读取函数声明。这就意味着可以把函数声明放在调用它的语句后面。
+</p>
+<pre>
+<code class="javascript">sayHi();
+function sayHi(){
+alert("Hi!");
+ }</code>
+</pre>
+</div>
+ <div class="p-section">
+<h3>② 闭包：</h3>
+<p>
+闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。如下所示：
+</p>
+<pre>
+<code class="javascript">function createComparisonFunction(propertyName) {
+return function(object1, object2){
+var value1 = object1[propertyName];
+var value2 = object2[propertyName];
+if (value1 < value2){
+    return -1;
+} else if (value1 > value2){
+     return 1;
+} else {
+     return 0;
+}
+ };
+  }</code>
+</pre>
+<p>
+在这个例子中，突出的那两行代码是内部函数（一个匿名函数）中的代码，这两行代码访问了外部
+函数中的变量propertyName。即使这个内部函数被返回了，而且是在其他地方被调用了，但它仍然可
+以访问变量propertyName。之所以还能够访问这个变量，是因为内部函数的作用域链中包含
+createComparisonFunction()的作用域。
+</p>
+</div>
+ </div>
+      </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-1">
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<!--页脚-->
+<footer>
+    <ul class="container">
+        <li><a href="##"><i class="fa fa-qq" aria-hidden="true"></i><span> 2498654056 </span></a></li>
+        <li><a href="#"><span> © 2017 刘中伦</span></a></li>
+        <li><a href="##"><i class="fa fa-github"></i><span> GitHub</span></a></li>
+    </ul>
+</footer>
+<!--搜索-->
+<div id="search-box">
+    <div id="close">
+        <span class="fa fa-times-circle-o fa-5x"></span>
+    </div>
+    <div class="row">
+        <div class="search-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div id="laber">
+                <span class="label label-default">jQuery</span>
+                <span class="label label-primary">Bootstrap</span>
+                <span class="label label-success">JavaScript</span>
+                <span class="label label-info">React.js</span>
+                <span class="label label-warning">CSS</span>
+                <span class="label label-danger">html</span>
+            </div>
+            <div id="search-form" class="input-group">
+                <input type="text" id="search_input" x-webkit-speech='' class="form-control" placeholder="Search" />
+                <span type="submit" class="input-group-addon btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </span>
+            </div>
+            <div class="suggest" id="search-suggest" style="display: none">
+                <ul id="search-result"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Respond.js for IE 8 or less only -->
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="../js/vendor/respond.min.js"></script>
+<![endif]-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/search.js"></script>
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+</body>
+</html>

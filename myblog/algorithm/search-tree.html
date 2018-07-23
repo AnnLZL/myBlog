@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ann' blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="apple-touch-icon" href="../icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+                Ann
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="../index.html"><span class="fa fa-home fa-lg" aria-hidden="true"></span> <b>Home </b><span class="sr-only">(current)</span></a></li>
+                <li><a href="../pictures.html"><span class="fa fa-picture-o fa-lg" aria-hidden="true"></span> <b>Pictures </b></a></li>
+                <li id="search"><a href="#"><span class="fa fa-search fa-lg" aria-hidden="true"></span> <b>Search </b></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--内容-->
+<main class="post-contents">
+    <div class="container-fluid">
+        <div class="col-lg-2 col-md-2 col-sm-1">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-10">
+            <div class="post-content">
+                <div class="post-header">
+                    <h1>二叉搜索树</h1>
+                </div>
+                <div class="content">
+                    <div class="p-section">
+                        <h3>树的定义</h3>
+                        <p>树是由一组以边连接的节点组成，边描述了各节点之间的关系。一棵树最上面的节点称为根节点，如果一个节点下面连接多个节点，那么该节点称为父节点，它下面的节点称为子节点。一个节点可以有0个、1个或多个子节点。没有任何子节点的节点称为叶子节点。沿着一组特定的边，可以从一个节点走到另一个与它不直接相连的节点，从一个节点到另一个节点的这一组边称为路径，图中用虚线表示。以某种特定的顺序访问树中所有的节点称为树的遍历。树可以分为几个层次，根节点是第0层，它的子节点是第1层，子节点的子节点是第2层，以此类推。树中任何一层的节点可以都看做是子树的根，该子树包含根节点的子节点，子节点的子节点等。我们定义树的层数就是树的深度。</p>
+
+                        <p>二叉树每个节点的子节点不允许超过两个，一个父节点的两个子节点分别称为左节点和右节点。在一些二叉树的实现中，左节点包含一组特定的值，右节点包含另一组特定的值。</p>
+                    </div>
+
+                    <div class="p-section">
+                        <h3>实现二叉搜索树</h3>
+                        <p>二叉搜索树由节点组成，所以我们要定义的第一个对象是<code>Node</code>类。</p>
+                        <pre><code class="javascript">function Node(data,left,right){
+   this.data=data;
+   this.count=1;  //同一记录出现的次数
+   this.left=left;
+   this.right=right;
+   this.show=show;
+}
+
+function show(){    //显示当前节点
+   return this.data+"  "+this.count;
+}
+</code></pre>
+                        <p><code>Node</code>对象既保存数据，也保存和其他节点的链接（<code>left</code>和<code>right</code>），<code>show()</code>方法用来显示保存在节点中的数据。现在可以创建一个类，用来表示二叉查找树（<code>BST</code>）。我们让类只包含一个数据成员：一个表示二叉查找树根节点的<code>Node</code>对象。该类的构造函数将根节点初始化为<code>null</code>，以此创建一个空节点。</p>
+                        <pre><code class="javascript">function BST(){
+   this.root=null;
+   this.insert=insert;      //插入
+   this.inOrder=inOrder;    //中序遍历
+   this.preOrder=preOrder;  //先序遍历
+   this.postOrder=postOrder;  //后序遍历
+   this.getMin=getMin;  //返回值最小的节点
+   this.getMax=getMax;  //返回值最大的节点
+   this.find=find;  //返回二叉查找树上的查找结果
+   this.remove=remove;
+   this.removeNode=removeNode;  //删除节点
+}
+</code></pre>
+                        <p><code>BST</code>类的方法如下：</p>
+                        <pre><code class="javascript">    function insert(data){
+        var n=new Node(data,null,null);
+        if(this.root==null){
+            this.root=n;
+        }
+        else {
+            var current=this.root;
+            var parent;     //parent用来保存当前节点的父节点
+            while(true){
+                parent=current;
+                if(data&lt;current.data){
+                    current=current.left;
+                    if(current==null){
+                        parent.left=n;
+                        break
+                    }
+                }
+                else if(data&gt;current.data){
+                    current=current.right;
+                    if(current==null){
+                        parent.right=n;
+                        break;
+                    }
+                }
+                else {
+                    current.count++;
+                    break;
+                }
+            }
+        }
+    }
+
+    //在二叉查找树上进行查找  查找给定值 查找最小值 查找最大值
+    function getMin(node){
+        var current=node;
+        while(current.left!=null){
+            current=current.left;
+        }
+        return current.data;
+    }
+
+    function getMax(node){
+        var current=node;
+        while(current.right!=null){
+            current=current.right;
+        }
+        return current.data;
+    }
+
+    function find(data){
+        var current=this.root;
+        while(current!=null){
+            if(current.data==data){
+                return current;
+            }
+            else if(current.data&lt;data){
+                current=current.right;
+            }
+            else {
+                current=current.left;
+            }
+        }
+        return null;
+    }
+
+    function remove(data){
+        this.root=removeNode(this.root,data);
+    }
+
+    function removeNode(node,data){
+        if(node==null){
+            return null;
+        }
+
+        if(data==node.data){
+            if(node.left==null&amp;&amp;node.right==null){
+                return null;
+            }
+            //没有左子节点的节点
+            if(node.left==null){
+                return node.right;
+            }
+            //没有右子节点的节点
+            if(node.right==null){
+                return node.left;
+            }
+
+            //有两个子节点的节点
+            var tmpNode=getMin(node.right);
+            node.data=tmpNode;
+            node.right=removeNode(node.right,tmpNode);
+            return node;
+        }
+        else if(data&lt;node.data){
+            node.left=removeNode(node.left,data);
+            return node;
+        }
+        else {
+            node.right=removeNode(node.right,data);
+            return node;  //当前节点返回后，即为上一层节点所指
+        }
+    }
+
+    //我们还需要有能力遍历BST，这样就可以按照不同的顺序显示节点上的数据
+    function inOrder(node){
+        if(node!=null){
+            inOrder(node.left);
+            document.write(node.show()+"\n");
+            inOrder(node.right);
+        }
+    }
+
+    function preOrder(node){
+        if(node!=null){
+            document.write(node.show()+"\n");
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
+
+    function postOrder(node){
+        if(node!=null){
+            postOrder(node.left);
+            postOrder(node.right);
+            document.write(node.show()+"\n");
+        }
+    }
+
+</code></pre>
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-part2">
+                <!-- 多说评论框 start -->
+                <div class="ds-thread" data-thread-key="https://AnnLZL.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2017/11/16/search-tree" data-title="二叉搜索树" data-url="https://AnnLZL.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2017/11/16/search-tree"></div>
+                <!-- 多说评论框 end -->
+                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                <script type="text/javascript">
+                    var duoshuoQuery = {short_name:"ycps"};
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';ds.async = true;
+                        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0]
+                        || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- 多说公共JS代码 end -->
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-1">
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+<!--页脚-->
+<footer>
+    <ul class="container">
+        <li><a href="##"><i class="fa fa-qq" aria-hidden="true"></i><span> 2498654056 </span></a></li>
+        <li><a href="#"><span> © 2017 刘中伦</span></a></li>
+        <li><a href="##"><i class="fa fa-github"></i><span> GitHub</span></a></li>
+    </ul>
+</footer>
+<!--搜索-->
+<div id="search-box">
+    <div id="close">
+        <span class="fa fa-times-circle-o fa-5x"></span>
+    </div>
+    <div class="row">
+        <div class="search-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div id="laber">
+                <span class="label label-default">jQuery</span>
+                <span class="label label-primary">Bootstrap</span>
+                <span class="label label-success">JavaScript</span>
+                <span class="label label-info">React.js</span>
+                <span class="label label-warning">CSS</span>
+                <span class="label label-danger">html</span>
+            </div>
+            <div id="search-form" class="input-group">
+                <input type="text" id="search_input" x-webkit-speech='' class="form-control" placeholder="Search" />
+                <span type="submit" class="input-group-addon btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </span>
+            </div>
+            <div class="suggest" id="search-suggest" style="display: none">
+                <ul id="search-result"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Respond.js for IE 8 or less only -->
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="../js/vendor/respond.min.js"></script>
+<![endif]-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/search.js"></script>
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+</body>
+</html>

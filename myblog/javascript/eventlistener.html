@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ann' blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="apple-touch-icon" href="../icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+                Ann
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="../index.html"><span class="fa fa-home fa-lg" aria-hidden="true"></span> <b>Home </b><span class="sr-only">(current)</span></a></li>
+                <li><a href="../pictures.html"><span class="fa fa-picture-o fa-lg" aria-hidden="true"></span> <b>Pictures </b></a></li>
+                <li id="search"><a href="#"><span class="fa fa-search fa-lg" aria-hidden="true"></span> <b>Search </b></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--内容-->
+<main class="post-contents">
+    <div class="container-fluid">
+        <div class="col-lg-2 col-md-2 col-sm-1">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-10">
+            <div class="post-content">
+                <div class="post-header">
+                    <h1>添加和移除事件处理器</h1>
+                </div>
+                <div class="content">
+                    <div class="p-section">
+                        <h3>典型的跨浏览器代码</h3>
+                        <pre><code class="javascript">function addHandler(target,eventType,handler){
+   if(target.addEventListener){   //DOM2 events
+      target.addEventListener(eventType,handler,false);
+   }
+   else {   //IE
+      target.attachEvent("on"+eventType,handler);
+   }
+}
+
+function removeHandler(target,eventType,handler){
+   if(target.removeEventListener){  //DOM2 events
+      target.removeEventListener(eventType,handler,false);
+   }
+   else {
+      target.detachEvent("on"+eventType,handler);
+   }
+}
+</code></pre>
+                        <p>此代码通过测试<code>addEventListener()</code>和<code>removeEventListener()</code>来测试DOM2 level事件是否被支持。除IE外，所有主流浏览器支持DOM2 level事件，如果此方法在<code>target</code>中不存在，则假定当前浏览器为IE，并使用IE特有的方法。</p><p>咋一看这个函数似乎已经充分优化了。隐藏的性能问题在于每次函数调用时都做了重复工作，因为每次的检测过程都相同：看看指定方法是否存在。如果你假定<code>target</code>唯一值就是DOM对象，而且用户不可能在加载完页面后奇迹般的改变浏览器，那么这次检测就是重复的。如果在第一次调用<code>addHandler()</code>时就确定<code>addEventListener()</code>是存在的，那么随后每次调用它都是存在的，每次调用同一个函数都重复相同的工作是一种浪费，有几种方法可以避免它。</p>
+                    </div>
+
+                    <div class="p-section">
+                        <h3>延迟加载</h3>
+                        <p>第一种消除函数中的重复工作的方法是延迟加载(lazy loading)。延迟加载意味着信息被使用前不回做任何操作。比如前面的例子，在函数被调用前，没有必要判断改用哪个
+                            方法去绑定或消除事件处理器。采用延迟加载的函数版本如下：</p>
+                        <pre><code class="javascript">function addHandler(target,eventType,handler){
+
+   //复写现有函数
+   if(target.addEventListener){  //DOM2 events
+      addHandler = function(target,eventType,handler){
+	     target.addEventListener(eventType,handler,false);
+	  };
+   }
+   else {   //IE
+      addHandler= function(target,eventType,handler){
+	     target.attachEvent("on"+eventType,handler);
+	  };
+   }
+
+   //调用新函数
+   addHandler(target,eventType,handler);
+}
+
+function removeHandler(target,eventType,handler){
+   //复写现有函数
+   if(target.removeEventListener){
+      removeHandler=function(target,eventType,handler){
+	     target.removeEventListener(eventType,handler,false);
+	  };
+   }
+   else {  //IE
+      removeHandler=function(target,eventType,handler){
+	     target.detachEvent("on"+eventType,handler);
+	  };
+   }
+
+   //调用新函数
+   removeHandler(target,event,handler);
+}
+</code></pre>
+                        <p>这两个函数实现了延迟加载模式。这两个方法在第一次调用时，会先检查并决定用哪种方法去绑定或取消绑定事件处理器。然后原始函数会被包含正确操作的新函数覆盖。最后一步调用新的函数，并传入原始参数。随后每次调用<code>addHandler()</code>和<code>removeHandler()</code>都不会再做检查，因为检测代码已经被新的函数覆盖。</p>
+                        <p>调用延迟加载函数时，第一次总会消耗较长的时间，因为它必须运行检测接着再调用另一个函数完成任务。但随后调用相同的函数，速度会更快，因为不需要再执行检测逻辑，当一个函数在页面中不会被立即调用时延迟加载是最好的选择。</p>
+                    </div>
+
+                    <div class="p-section">
+                        <h3>条件预加载</h3>
+                        <p>除了延迟加载函数之外的另一种选择是：条件预加载(conditional advanceloading)，它会在脚本加载期间提前检测，而不会等到函数被调用。检测的操作依然只是一次，
+                            只是它在过程中来的更早。例如</p>
+                        <pre><code class="javascript">var addHandler=document.body.addEventListener?
+   function(target,eventType,handler){
+      target.addEventListener(eventType,handler,false);
+   }:
+   function(target,eventType,handler){
+      target.attachEvent("on"+eventType,handler);
+   };
+
+var removeHandler=document.body.removeEventListener?
+   function(target,eventType,handler){
+      target.removeEventListener(eventType,handler,false);
+   }:
+   function(target,eventType,handler){
+      target.detachEvent("on"+eventType,handler);
+   }
+</code></pre>
+                        <p>这个例子会先检测<code>addEventListener()</code>和<code>removeEventListener()</code>是否存在，然后根据结果指定选择最佳的函数。如果它们存在的话，三元运算符会返回DOM2 level函数，否则返回IE特有的函数，这样做的结果是所有对<code>addHandler()</code>和<code>removeHandler()</code>的调用都十分快，因为检测提前发生了。条件预加载确保所有函数调用消耗的时间相同。其代价是需要在脚本加载时检测，而不是加载后，预加载适合于一个函数马上就要被用到，而且在整个页面的生命周期中频繁出现的场合。</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="post-part2">
+                <!-- 多说评论框 start -->
+                <div class="ds-thread" data-thread-key="https://AnnLZL.github.io/javascript/2017/12/22/eventlistener" data-title="添加和移除事件处理器" data-url="https://AnnLZL.github.io/javascript/2017/12/22/eventlistener"></div>
+                <!-- 多说评论框 end -->
+                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                <script type="text/javascript">
+                    var duoshuoQuery = {short_name:"ycps"};
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';ds.async = true;
+                        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0]
+                        || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- 多说公共JS代码 end -->
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-1">
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+<!--页脚-->
+<footer>
+    <ul class="container">
+        <li><a href="##"><i class="fa fa-qq" aria-hidden="true"></i><span> 2498654056 </span></a></li>
+        <li><a href="#"><span> © 2017 刘中伦</span></a></li>
+        <li><a href="##"><i class="fa fa-github"></i><span> GitHub</span></a></li>
+    </ul>
+</footer>
+<!--搜索-->
+<div id="search-box">
+    <div id="close">
+        <span class="fa fa-times-circle-o fa-5x"></span>
+    </div>
+    <div class="row">
+        <div class="search-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div id="laber">
+                <span class="label label-default">jQuery</span>
+                <span class="label label-primary">Bootstrap</span>
+                <span class="label label-success">JavaScript</span>
+                <span class="label label-info">React.js</span>
+                <span class="label label-warning">CSS</span>
+                <span class="label label-danger">html</span>
+            </div>
+            <div id="search-form" class="input-group">
+                <input type="text" id="search_input" x-webkit-speech='' class="form-control" placeholder="Search" />
+                <span type="submit" class="input-group-addon btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </span>
+            </div>
+            <div class="suggest" id="search-suggest" style="display: none">
+                <ul id="search-result"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Respond.js for IE 8 or less only -->
+<!--[if (lt IE 9) & (!IEMobile)]>
+<script src="../js/vendor/respond.min.js"></script>
+<![endif]-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/search.js"></script>
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+</body>
+</html>
