@@ -49,7 +49,7 @@ var ajaxGet = function (url, callback) {
 //为JS动态生成的网页元素添加事件时，通常要使用事件代理来实现
 var delegateEvent = function (target, event,fn) {
     addEvent(document,event,function (e) {
-        if(e.target.nodeName == target.nodeName){
+        if(e.target.nodeName == target.toUpperCase()){
             fn.call(e.target);
         }
     });
@@ -104,16 +104,21 @@ addEvent('search','click',function (e) {
             getDOM('search-result').querySelector('li').click();
         }
     });
-    var li = getDOM('search-result').querySelectorAll('li');
-    delegateEvent(li, 'click', function () {
-        var url = this.getAttribute('title');
-        window.location.href = 'myBlog/'+url;
-
-    });
-    addEvent(document,'click',function () {
-        _dom.style.display = 'none';
-    });
+    // var li = getDOM('search-result').querySelectorAll('li');
+    // console.log(li);
+    // delegateEvent('li', 'click', function () {
+    //     var url = this.getAttribute('title');
+    //     location.href = 'myBlog'+url;
+    //
+    // });
+    // addEvent(document,'click',function () {
+    //     _dom.style.display = 'none';
+    // });
     addEvent('close','click',function () {
         getDOM('search-box').style.display = 'none';
     })
+});
+delegateEvent('li', 'click', function () {
+    var url = this.getAttribute('title');
+    location.href = 'myBlog'+url;
 });
