@@ -80,7 +80,7 @@ addEvent('search','click',function (e) {
     var _dom = getDOM('search-suggest');
     addEvent('search_input', 'keyup', function () {
         var searchText = getDOM('search_input').value;
-        ajaxGet('search.json', function (data) {
+        ajaxGet('https://annlzl.github.io/myBlog/search.json', function (data) {
             var names=[];
             var urls=[];
             if(data.code==0){
@@ -107,7 +107,6 @@ addEvent('search','click',function (e) {
     var li = getDOM('search-result').querySelectorAll('li');
     delegateEvent(li, 'click', function () {
         var url = this.getAttribute('title');
-        console.log(url);
         window.location.href = 'myBlog/'+url;
 
     });
