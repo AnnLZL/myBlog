@@ -63,7 +63,7 @@ var seqSearch = function (arr,urls,data) {
         if(matches){
             var index = matches.index;     //匹配项在字符串中的位置
             var input = matches.input;     //应用正则表达式的字符串
-            html += '<li title ='+urls[i]+'>'+input.slice(0,index)+'<span style="color: yellow "> '+data+'</span>'+input.slice(index+data.length)+'</li>';
+            html += '<li title ='+urls[i]+'>'+input.slice(0,index)+'<span style="color: red "> '+data+'</span>'+input.slice(index+data.length)+'</li>';
         }
     }
     if(html){
@@ -107,7 +107,7 @@ addEvent('search','click',function (e) {
     var li = getDOM('search-result').querySelectorAll('li');
     delegateEvent(li, 'click', function () {
         var url = this.getAttribute('title');
-        location.href = 'https://annlzl.github.io/myBlog/'+url;
+        location.href = 'myBlog/'+url;
     });
     addEvent(document,'click',function () {
         _dom.style.display = 'none';
