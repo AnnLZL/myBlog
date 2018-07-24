@@ -58,7 +58,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eventlistener.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="eventlistener.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/javascript/eventlistener.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
@@ -98,7 +98,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="this.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="this.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/this.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
@@ -359,12 +359,12 @@
       <workItem from="1532082382136" duration="1304000" />
       <workItem from="1532084347809" duration="38000" />
       <workItem from="1532092545983" duration="3662000" />
-      <workItem from="1532310389154" duration="2977000" />
+      <workItem from="1532310389154" duration="3595000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7981000" />
+    <option name="totallyTimeSpent" value="8599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="1176" extended-state="7" />
@@ -530,14 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/eventlistener.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="217" column="16" lean-forward="false" selection-start-line="217" selection-start-column="16" selection-end-line="217" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/javascript/loadjs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -570,6 +562,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/search.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="37" column="23" lean-forward="false" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/javascript/this.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -578,10 +578,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search.json">
+    <entry file="file://$PROJECT_DIR$/javascript/eventlistener.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="37" column="23" lean-forward="false" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="25" />
+        <state relative-caret-position="551">
+          <caret line="217" column="16" lean-forward="false" selection-start-line="217" selection-start-column="16" selection-end-line="217" selection-end-column="16" />
           <folding />
         </state>
       </provider>
