@@ -107,7 +107,9 @@ addEvent('search','click',function (e) {
     var li = getDOM('search-result').querySelectorAll('li');
     delegateEvent(li, 'click', function () {
         var url = this.getAttribute('title');
+        console.log(url);
         window.location.href = 'myBlog/'+url;
+
     });
     addEvent(document,'click',function () {
         _dom.style.display = 'none';
