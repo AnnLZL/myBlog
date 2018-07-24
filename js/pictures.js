@@ -32,7 +32,6 @@ window.onload = function () {
                             this.style.opacity = 0;
                         },function () {
                             endNum++;    //只要有一张图片走完了，就让它加个1
-
                             if(endNum == imgs.length){
                                 toBig();
                             }
