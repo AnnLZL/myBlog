@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fae07dd9-9756-4ee1-9494-6adfb3a888c6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/search-tree.html" afterPath="$PROJECT_DIR$/algorithm/search-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html-css/css-layout.html" afterPath="$PROJECT_DIR$/html-css/css-layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/closure.html" afterPath="$PROJECT_DIR$/javascript/closure.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/eventlistener.html" afterPath="$PROJECT_DIR$/javascript/eventlistener.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/execution-and-scope.html" afterPath="$PROJECT_DIR$/javascript/execution-and-scope.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/loadjs.html" afterPath="$PROJECT_DIR$/javascript/loadjs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/private-variables.html" afterPath="$PROJECT_DIR$/javascript/private-variables.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/this.html" afterPath="$PROJECT_DIR$/javascript/this.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pictures.html" afterPath="$PROJECT_DIR$/pictures.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/search.js" afterPath="$PROJECT_DIR$/js/search.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -133,10 +123,10 @@
       <file leaf-file-name="search.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="110" column="7" lean-forward="true" selection-start-line="110" selection-start-column="7" selection-end-line="110" selection-end-column="7" />
+            <state relative-caret-position="510">
+              <caret line="109" column="45" lean-forward="true" selection-start-line="109" selection-start-column="45" selection-end-line="109" selection-end-column="45" />
               <folding>
-                <marker date="1532402472516" expanded="true" signature="2283:2294" ph="..." />
+                <marker date="1532403821968" expanded="true" signature="2283:2294" ph="..." />
               </folding>
             </state>
           </provider>
@@ -169,7 +159,6 @@
         <option value="$PROJECT_DIR$/javascript/2017/12/22/eventlistener.html" />
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/search.json" />
-        <option value="$PROJECT_DIR$/js/search.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/pictures.html" />
         <option value="$PROJECT_DIR$/javascript/this.html" />
@@ -180,6 +169,7 @@
         <option value="$PROJECT_DIR$/javascript/closure.html" />
         <option value="$PROJECT_DIR$/html-css/css-layout.html" />
         <option value="$PROJECT_DIR$/algorithm/search-tree.html" />
+        <option value="$PROJECT_DIR$/js/search.js" />
       </list>
     </option>
   </component>
@@ -190,10 +180,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="1176" />
+    <option name="x" value="632" />
+    <option name="y" value="136" />
+    <option name="width" value="881" />
+    <option name="height" value="1110" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -371,18 +361,18 @@
       <workItem from="1532084347809" duration="38000" />
       <workItem from="1532092545983" duration="3662000" />
       <workItem from="1532310389154" duration="5608000" />
-      <workItem from="1532401309498" duration="2288000" />
+      <workItem from="1532401309498" duration="2511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12900000" />
+    <option name="totallyTimeSpent" value="13123000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="1176" extended-state="6" />
+    <frame x="632" y="136" width="881" height="1110" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2858048" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53499407" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -488,7 +478,7 @@
         <state relative-caret-position="2987">
           <caret line="103" column="64" lean-forward="false" selection-start-line="103" selection-start-column="64" selection-end-line="103" selection-end-column="64" />
           <folding>
-            <marker date="1532402472516" expanded="true" signature="2283:2294" ph="..." />
+            <marker date="1532403821968" expanded="true" signature="2283:2294" ph="..." />
           </folding>
         </state>
       </provider>
@@ -680,10 +670,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="110" column="7" lean-forward="true" selection-start-line="110" selection-start-column="7" selection-end-line="110" selection-end-column="7" />
+        <state relative-caret-position="510">
+          <caret line="109" column="45" lean-forward="true" selection-start-line="109" selection-start-column="45" selection-end-line="109" selection-end-column="45" />
           <folding>
-            <marker date="1532402472516" expanded="true" signature="2283:2294" ph="..." />
+            <marker date="1532403821968" expanded="true" signature="2283:2294" ph="..." />
           </folding>
         </state>
       </provider>
