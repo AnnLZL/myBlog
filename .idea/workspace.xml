@@ -73,10 +73,10 @@
       <file leaf-file-name="search.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="122" column="20" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+            <state relative-caret-position="704">
+              <caret line="116" column="3" lean-forward="true" selection-start-line="116" selection-start-column="3" selection-end-line="116" selection-end-column="3" />
               <folding>
-                <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
+                <marker date="1532415747346" expanded="true" signature="2288:2299" ph="..." />
               </folding>
             </state>
           </provider>
@@ -308,12 +308,12 @@
       <workItem from="1532084347809" duration="38000" />
       <workItem from="1532092545983" duration="3662000" />
       <workItem from="1532310389154" duration="5608000" />
-      <workItem from="1532401309498" duration="8582000" />
+      <workItem from="1532401309498" duration="8887000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19194000" />
+    <option name="totallyTimeSpent" value="19499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="698" y="142" width="736" height="1110" extended-state="0" />
@@ -425,7 +425,7 @@
         <state relative-caret-position="2987">
           <caret line="103" column="64" lean-forward="false" selection-start-line="103" selection-start-column="64" selection-end-line="103" selection-end-column="64" />
           <folding>
-            <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
+            <marker date="1532415747346" expanded="true" signature="2288:2299" ph="..." />
           </folding>
         </state>
       </provider>
@@ -617,10 +617,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="122" column="20" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+        <state relative-caret-position="704">
+          <caret line="116" column="3" lean-forward="true" selection-start-line="116" selection-start-column="3" selection-end-line="116" selection-end-column="3" />
           <folding>
-            <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
+            <marker date="1532415747346" expanded="true" signature="2288:2299" ph="..." />
           </folding>
         </state>
       </provider>

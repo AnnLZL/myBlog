@@ -104,16 +104,9 @@ addEvent('search','click',function (e) {
             getDOM('search-result').querySelector('li').click();
         }
     });
-    // var li = getDOM('search-result').querySelectorAll('li');
-    // console.log(li);
-    // delegateEvent('li', 'click', function () {
-    //     var url = this.getAttribute('title');
-    //     location.href = 'myBlog'+url;
-    //
-    // });
-    // addEvent(document,'click',function () {
-    //     _dom.style.display = 'none';
-    // });
+    addEvent(document,'click',function () {
+        _dom.style.display = 'none';
+    });
     addEvent('close','click',function () {
         getDOM('search-box').style.display = 'none';
     })
