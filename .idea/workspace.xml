@@ -40,7 +40,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="174">
@@ -70,13 +70,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="search.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+            <state relative-caret-position="675">
+              <caret line="122" column="20" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
               <folding>
-                <marker date="1532415298153" expanded="true" signature="2288:2299" ph="..." />
+                <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
               </folding>
             </state>
           </provider>
@@ -120,8 +120,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="48" />
-    <option name="y" value="136" />
+    <option name="x" value="698" />
+    <option name="y" value="142" />
     <option name="width" value="736" />
     <option name="height" value="1110" />
   </component>
@@ -308,15 +308,15 @@
       <workItem from="1532084347809" duration="38000" />
       <workItem from="1532092545983" duration="3662000" />
       <workItem from="1532310389154" duration="5608000" />
-      <workItem from="1532401309498" duration="8440000" />
+      <workItem from="1532401309498" duration="8582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19052000" />
+    <option name="totallyTimeSpent" value="19194000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="136" width="736" height="1110" extended-state="0" />
+    <frame x="698" y="142" width="736" height="1110" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5346882" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -425,7 +425,7 @@
         <state relative-caret-position="2987">
           <caret line="103" column="64" lean-forward="false" selection-start-line="103" selection-start-column="64" selection-end-line="103" selection-end-column="64" />
           <folding>
-            <marker date="1532415298153" expanded="true" signature="2288:2299" ph="..." />
+            <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
           </folding>
         </state>
       </provider>
@@ -607,21 +607,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
-          <folding>
-            <marker date="1532415298153" expanded="true" signature="2288:2299" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="122" column="20" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+          <folding>
+            <marker date="1532415441726" expanded="true" signature="2288:2299" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

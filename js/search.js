@@ -120,5 +120,5 @@ addEvent('search','click',function (e) {
 });
 delegateEvent('li', 'click', function () {
     var url = this.getAttribute('title');
-    location.href = 'myBlog'+url;
+    location.href = url;
 });
